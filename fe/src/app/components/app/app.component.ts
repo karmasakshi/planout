@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MyExperiment } from './MyExperiment';
+import { MyExperiment } from '../../MyExperiment';
 
 @Component({
   selector: 'fe-root',
