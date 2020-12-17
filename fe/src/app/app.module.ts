@@ -1,3 +1,4 @@
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -11,6 +12,7 @@ import { AppComponent } from './components/app/app.component';
     AppComponent
   ],
   imports: [
+    HttpClientModule,
     MatButtonModule,
     MatCardModule,
     MatToolbarModule,

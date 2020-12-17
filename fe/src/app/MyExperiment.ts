@@ -1,4 +1,5 @@
 import * as PlanOut from 'planout';
+import { ConfigOptions } from './interfaces/config-options';
 
 interface Identifier {
   userId: number;
@@ -10,6 +11,19 @@ interface Configuration {
 }
 
 export class MyExperiment extends PlanOut.Experiment<Identifier, Configuration> {
+
+  private configOptions: ConfigOptions = {
+    ctaButtonColors: ['primary'],
+    ctaButtonTexts: ['Let\'s Go!']
+  };
+
+  constructor(identifier: Identifier, configOptions: ConfigOptions) {
+
+    super(identifier);
+
+    this.configOptions = configOptions;
+
+  }
 
   configureLogger(): void { return; }
 
@@ -23,8 +37,9 @@ export class MyExperiment extends PlanOut.Experiment<Identifier, Configuration> 
 
   assign(params: any, args: Identifier): any {
 
-    params.set('buttonColor', new PlanOut.Ops.Random.UniformChoice({ choices: ['accent', 'primary', 'warn', ''], unit: args.userId }));
-    params.set('buttonText', new PlanOut.Ops.Random.WeightedChoice({ choices: ['GO', 'CLICK ME!'], weights: [2, 8], unit: args.userId }));
+    params.set('buttonColor', new PlanOut.Ops.Random.UniformChoice({ choices: this.configOptions?.ctaButtonColors, unit: args.userId }));
+
+    params.set('buttonText', new PlanOut.Ops.Random.WeightedChoice({ choices: this.configOptions?.ctaButtonTexts, weights: [2, 8], unit: args.userId }));
 
   }
 

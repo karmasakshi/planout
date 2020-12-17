@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { take } from 'rxjs/operators';
+import { ConfigOptions } from 'src/app/interfaces/config-options';
+import { ConfigService } from 'src/app/services/config/config.service';
 import { MyExperiment } from '../../MyExperiment';
 
 @Component({
@@ -7,6 +10,10 @@ import { MyExperiment } from '../../MyExperiment';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
+
+  constructor(
+    private configService: ConfigService
+  ) { }
 
   public users = [
     { ctaText: 'GO!', ctaColor: 'warn', id: 11, name: 'Robert' },
@@ -19,15 +26,23 @@ export class AppComponent implements OnInit {
 
   public ngOnInit(): void {
 
-    for (let user of this.users) {
+    this.configService.getConfigOptions().pipe(take(1)).subscribe(
 
-      let xp = new MyExperiment({ userId: user.id });
+      (response: ConfigOptions) => {
 
-      user['ctaColor'] = xp.get('buttonColor', 'string');
+        for (let user of this.users) {
 
-      user['ctaText'] = xp.get('buttonText', 'string');
+          let xp = new MyExperiment({ userId: user.id }, response);
 
-    }
+          user['ctaColor'] = xp.get('buttonColor', 'string');
+
+          user['ctaText'] = xp.get('buttonText', 'string');
+
+        }
+
+      }
+
+    );
 
   }
 
