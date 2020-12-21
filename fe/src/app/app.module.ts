@@ -5,11 +5,16 @@ import { MatCardModule } from '@angular/material/card';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { RouterModule } from '@angular/router';
 import { AppComponent } from './components/app/app.component';
+import { FormComponent } from './components/form/form.component';
+import { HomeComponent } from './components/home/home.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    HomeComponent,
+    FormComponent
   ],
   imports: [
     HttpClientModule,
@@ -17,7 +22,11 @@ import { AppComponent } from './components/app/app.component';
     MatCardModule,
     MatToolbarModule,
     BrowserModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RouterModule.forRoot([
+      { path: '', component: HomeComponent },
+      { path: 'set', component: FormComponent }
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
