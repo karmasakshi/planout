@@ -1,0 +1,8 @@
+<div *ngFor="let user of users" style="margin: 0 auto; width: 300px;">
+  <mat-card style="margin: 20px;">
+    <mat-card-content>
+      <p><strong>{{ user.name }} ({{ user.id }}) will see:</strong></p>
+      <button [color]="user.ctaColor" mat-raised-button type="button">{{ user.ctaText }}</button>
+    </mat-card-content>
+  </mat-card>
+</div>
