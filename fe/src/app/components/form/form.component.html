@@ -1,1 +1,15 @@
-<p>form works!</p>
+<form [formGroup]="configForm" (ngSubmit)="saveConfig()">
+  <div>
+    <mat-form-field>
+      <mat-label>CTA COLORS</mat-label>
+      <input matInput formControlName="ctaButtonColors" maxlength="256">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field>
+      <mat-label>CTA TEXTS</mat-label>
+      <input matInput formControlName="ctaButtonTexts" maxlength="256">
+    </mat-form-field>
+  </div>
+  <button color="primary" mat-raised-button type="submit">SET</button>
+</form>

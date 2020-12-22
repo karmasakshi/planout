@@ -18,4 +18,10 @@ export class ConfigService {
 
   }
 
+  setConfigOptions(configOptions: ConfigOptions): Observable<ConfigOptions> {
+
+    return this.httpClient.post<ConfigOptions>('http://localhost:3000/set', configOptions);
+
+  }
+
 }
